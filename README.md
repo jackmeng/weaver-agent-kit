@@ -24,12 +24,12 @@
 
 ### 1. Codex（CLI / Desktop App）— 插件市场安装
 
-直接将下面话术发送给 Codex（将 `<YOUR_PUBLIC_REPO_URL>` 替换为本仓库公开 Git 地址）：
+直接将下面话术发送给 Codex：
 
 ```text
 帮我安装 YingYou 影游插件，让我可以在这里创作互动影游。
 
-1. 添加插件目录：执行 `codex plugin marketplace add <YOUR_PUBLIC_REPO_URL> --ref main`
+1. 添加插件目录：执行 `codex plugin marketplace add https://github.com/jackmeng/yingyou-agent-kit.git --ref main`
 2. 安装插件：执行 `codex plugin add yingyou-film@yingyou`
 3. 新建任务后完成 YingYou 账户授权
 4. 授权就绪后告诉我，并给出 3 个可直接开始的创作示例（eg）
