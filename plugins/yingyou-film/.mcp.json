@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "yingyou-film": {
+      "url": "https://api.yy.vi-relay.com/api/v1/mcp/film"
+    }
+  }
+}

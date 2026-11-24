@@ -1,0 +1,32 @@
+{
+  "name": "yingyou",
+  "interface": {
+    "displayName": "YingYou (影游创作平台)"
+  },
+  "plugins": [
+    {
+      "name": "yingyou-film",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yingyou-film"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "yingyou-drama",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yingyou-drama"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Creativity"
+    }
+  ]
+}

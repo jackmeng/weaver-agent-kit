@@ -1,0 +1,37 @@
+{
+  "name": "yingyou-film",
+  "version": "1.0.0",
+  "description": "影游创作平台（YingYou / FilmGame）官方 Codex 插件：通过远程 MCP 与 OAuth 2.1 连接互动影游全流程创作工具（剧本策划、剧情树、角色/场景/道具资产与出图、分镜脚本、镜头视频与高清），详细规范由服务端 get_workflow_guide 实时下发。",
+  "author": {
+    "name": "YingYou"
+  },
+  "keywords": [
+    "yingyou",
+    "filmgame",
+    "影游",
+    "互动影游",
+    "剧本",
+    "分镜",
+    "视频",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "YingYou 影游创作",
+    "shortDescription": "互动影游全流程创作（剧本、剧情树、资产、分镜与视频）",
+    "longDescription": "连接影游创作平台远程 MCP 服务（OAuth 2.1 授权），支持剧本策划、分支剧情树、角色/场景/道具资产与出图、分镜提示词、镜头视频生成与高清超分。详细 SOP 与专业创作规范由服务端实时下发。",
+    "developerName": "YingYou",
+    "category": "Creativity",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Creative Workflow"
+    ],
+    "defaultPrompt": [
+      "帮我查看已有影游项目并读取当前进度",
+      "帮我创作一个悬疑题材的互动影游",
+      "为当前影游项目的下一个剧情节点生成分镜脚本"
+    ]
+  }
+}
