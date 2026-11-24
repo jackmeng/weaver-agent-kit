@@ -51,7 +51,7 @@
 
 > 如配置中存在旧的本地测试连接器（如 `filmgame-local`），建议移除后再使用云端 `YingYou`，避免工具名冲突。
 
-### 3. Hermes / 通用 Remote MCP 客户端
+### 3.Claude / Hermes / 通用 Remote MCP 客户端
 
 直接将下面话术发送给 Hermes 或其他支持远程 MCP 连接器的客户端：
 
@@ -63,29 +63,6 @@
 3. 保存后完成 YingYou 账户授权
 4. 授权就绪后告诉我，并给出 3 个可直接开始的创作示例（eg）
 ```
-
-### 4. ChatGPT（网页端 / Desktop）
-
-无需克隆本仓库：
-1. 打开 **Settings** → **Security and login / Features** → 开启 **Developer Mode**；
-2. 进入 **Plugins / Apps** → 点击 **`+`** → 选择 **Create MCP App / Add custom MCP server**；
-3. 名称填 `YingYou`，地址填 `https://api.yy.vi-relay.com/api/v1/mcp/film`（单阶段任务建议用 `/script`、`/assets` 或 `/storyboard`），认证选 **OAuth** 并完成影游账号授权；
-4. 在对话中选中 `YingYou` 插件即可开始创作。
-
-### 5. Claude Code / Cursor
-
-- **Claude Code**：执行 `claude mcp add --transport http yingyou-film https://api.yy.vi-relay.com/api/v1/mcp/film`
-- **Cursor**：在 `~/.cursor/mcp.json` 添加：
-  ```json
-  {
-    "mcpServers": {
-      "yingyou-film": {
-        "url": "https://api.yy.vi-relay.com/api/v1/mcp/film"
-      }
-    }
-  }
-  ```
-
 ---
 
 ## 三、授权后开场示例（eg）
