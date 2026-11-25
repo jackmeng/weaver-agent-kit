@@ -1,14 +1,14 @@
 {
-  "name": "yingyou",
+  "name": "weaver",
   "interface": {
-    "displayName": "YingYou (影游创作平台)"
+    "displayName": "Weaver (影游创作平台)"
   },
   "plugins": [
     {
-      "name": "yingyou-film",
+      "name": "weaver-film",
       "source": {
         "source": "local",
-        "path": "./plugins/yingyou-film"
+        "path": "./plugins/weaver-film"
       },
       "policy": {
         "installation": "AVAILABLE",

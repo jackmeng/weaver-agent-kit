@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "weaver-drama": {
+      "url": "https://api.weavercreate.com/api/v1/mcp/drama"
+    }
+  }
+}

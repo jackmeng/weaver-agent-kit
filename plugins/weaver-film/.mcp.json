@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "weaver-film": {
+      "url": "https://api.weavercreate.com/api/v1/mcp/film"
+    }
+  }
+}
