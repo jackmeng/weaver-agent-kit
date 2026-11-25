@@ -64,6 +64,11 @@ codex plugin add weaver-film@weaver
 
 `filmgame-sop` 是影游创作入口，覆盖剧本、剧情树、资产、分镜和视频。阶段指南与专业创作规范由远程 MCP 的 `get_workflow_guide` 提供。
 
+## 版本说明
+
+- **插件版本**（`plugin.json` 中的 `version`，遵循 SemVer）：仅在插件包内容（`.mcp.json`、随包 `SKILL.md`、插件清单）变更时递增；客户端按此版本判断是否需要升级插件。
+- **远程 MCP 服务端版本**：工具定义与阶段指南由服务端实时下发，无需升级插件即可生效。当前连到的服务端版本可在 MCP `initialize` 响应的 `serverInfo.version` 或 HTTP 响应头 `X-MCP-Server-Version` 中查看。
+
  
 ## 其他客户端
 
