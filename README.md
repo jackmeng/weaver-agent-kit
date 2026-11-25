@@ -1,43 +1,81 @@
-# YingYou Plugin Marketplace & Remote MCP 接入
+# YingYou Marketplace
 
-影游创作平台（YingYou / FilmGame）官方 **Codex Plugin Marketplace** 与远程 MCP 接入指南。
+YingYou 影游创作的 Codex 插件目录。当前提供 `yingyou-film@yingyou`，连接 [YingYou 远程 MCP](https://api.yy.vi-relay.com/api/v1/mcp/film)，使用自己的 YingYou 账号完成 OAuth 授权。
 
-详细 SOP、阶段指南与专业创作规范均由服务端 `get_workflow_guide` 实时下发，服务端更新后全客户端即时生效，无需重复更新本地文件。
+## 安装
 
----
+### Codex CLI
 
-## 一、开放 MCP 端点
+在终端添加 marketplace、安装影游插件，再完成 YingYou OAuth 授权。
 
-对外统一基址：`https://api.yy.vi-relay.com/api/v1/`
-
-| 业务线 / 场景 | 远程 MCP 地址 | 适用场景 |
-| --- | --- | --- |
-| 影游（全量） | `https://api.yy.vi-relay.com/api/v1/mcp/film` | 完整影游项目、剧本策划、剧情树、资产、分镜、视频与高清 |
-| 影游（剧本场景） | `https://api.yy.vi-relay.com/api/v1/mcp/film/script` | 仅需项目管理、剧本策划与剧情树时使用（工具数精简） |
-| 影游（资产场景） | `https://api.yy.vi-relay.com/api/v1/mcp/film/assets` | 仅需角色/场景/道具资产、音色与出图时使用 |
-| 影游（分镜与视频场景） | `https://api.yy.vi-relay.com/api/v1/mcp/film/storyboard` | 仅需拆镜、镜头提示词、视频生成与高清时使用 |
-| 短剧（演示） | `https://api.yy.vi-relay.com/api/v1/mcp/drama` | 短剧六步创作流程演示 |
-
----
-
-## 二、一键复制接入话术
-
-### 1. Codex（CLI / Desktop App）— 插件市场安装
-
-直接将下面话术发送给 Codex：
-
-```text
-帮我安装 YingYou 影游插件，让我可以在这里创作互动影游。
-
-1. 添加插件目录：执行 `codex plugin marketplace add https://github.com/jackmeng/yingyou-agent-kit.git --ref main`
-2. 安装插件：执行 `codex plugin add yingyou-film@yingyou`
-3. 新建任务后完成 YingYou 账户授权
-4. 授权就绪后告诉我，并给出 3 个可直接开始的创作示例（eg）
+```bash
+codex plugin marketplace add https://github.com/jackmeng/yingyou-agent-kit.git --ref main
+codex plugin add yingyou-film@yingyou
+codex mcp login yingyou-film
 ```
 
-> 短剧演示插件请将第 2 步改为 `codex plugin add yingyou-drama@yingyou`；日常升级执行 `codex plugin marketplace upgrade yingyou`。
+### ChatGPT Desktop 本地安装（Codex 模式）
 
-### 2. WorkBuddy
+1. 首次使用时，在终端执行上面的 `codex plugin marketplace add` 命令。
+2. 在 ChatGPT Desktop 的 **Plugins（插件）** 中选择 **YingYou (影游创作平台)**，打开 **YingYou 影游创作** 并安装。如果刚添加 marketplace 后没有看到它，重启 Desktop 后再检查。
+3. 如果 Desktop 提示连接 YingYou，按提示完成 OAuth 授权。
+4. 在 Desktop 的 **Codex 模式** 新建本地会话，通过 `@` 选择已安装的 YingYou 插件。
+
+macOS 上也可以在添加 marketplace 后从终端打开插件详情页。
+
+```bash
+open 'codex://plugins/install/yingyou-film?marketplace=yingyou'
+```
+
+### ChatGPT Work Mode
+
+这个仓库提供 Codex 本地 marketplace。当前尚未验证通过该 marketplace 安装的 YingYou 能在 ChatGPT Work Mode 调用 MCP 工具。插件显示已安装或能读取创作指南时，仍需在 Work Mode 新会话中实际调用 `list_projects` 验收。
+
+在具备自定义 MCP 创建权限的 Business、Enterprise 或 Edu 工作区，可以在 ChatGPT 网页端打开 **Plugins → + → Add custom MCP server**，填写 `https://api.yy.vi-relay.com/api/v1/mcp/film`，创建插件并按提示完成 OAuth。再在 Work Mode 新建会话，选中该插件并测试 `list_projects`。个人 Plus 用户可以按上文使用 Codex CLI，或在 Desktop 的 Codex 模式验证本地安装。
+
+参考 [OpenAI 自定义 MCP 接入说明](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt)。
+
+## 首次验证
+
+安装并授权后，新开一个你准备使用的会话，发送：
+
+> 使用 YingYou 的 `list_projects` 工具查看我的影游项目。
+
+工具实际返回项目列表即接入成功，空列表也算。CLI 和 Desktop 的结果分别验证。
+
+## 更新
+
+```bash
+codex plugin marketplace upgrade yingyou
+codex plugin add yingyou-film@yingyou
+```
+
+更新后新开会话，再运行一次「首次验证」。如果通过 GitHub 地址添加了 marketplace，更新以 GitHub 上的 `main` 为准，本地未推送的修改不会出现在这次更新里。
+
+## 排查
+
+| 现象 | 检查 |
+| --- | --- |
+| Desktop 找不到 YingYou | 确认已添加 `yingyou` marketplace，重启 Desktop 后从 Plugins 进入，或在 macOS 用上面的链接打开详情页。 |
+| YingYou 提示未授权 | 从 Desktop 的连接提示完成授权。CLI 可执行 `codex mcp login yingyou-film`。 |
+| 授权后仍找不到 `list_projects` | 新开会话，确认当前使用的是 Desktop Codex 还是 Work Mode，再对照上面的接入方式验证。工具缺失时无法通过首次验证。 |
+
+## 随包 Skill
+
+`filmgame-sop` 是影游创作入口，覆盖剧本、剧情树、资产、分镜和视频。阶段指南与专业创作规范由远程 MCP 的 `get_workflow_guide` 提供。
+
+## 开放 MCP 端点
+
+| 场景 | 远程 MCP 地址 |
+| --- | --- |
+| 影游全量 | `https://api.yy.vi-relay.com/api/v1/mcp/film` |
+| 剧本与剧情树 | `https://api.yy.vi-relay.com/api/v1/mcp/film/script` |
+| 资产与出图 | `https://api.yy.vi-relay.com/api/v1/mcp/film/assets` |
+| 分镜与视频 | `https://api.yy.vi-relay.com/api/v1/mcp/film/storyboard` |
+
+## 其他客户端
+
+### WorkBuddy
 
 直接将下面话术发送给 WorkBuddy：
 
@@ -51,7 +89,7 @@
 
 > 如配置中存在旧的本地测试连接器（如 `filmgame-local`），建议移除后再使用云端 `YingYou`，避免工具名冲突。
 
-### 3.Claude / Hermes / 通用 Remote MCP 客户端
+### Claude / Hermes / 通用 Remote MCP 客户端
 
 直接将下面话术发送给 Hermes 或其他支持远程 MCP 连接器的客户端：
 
@@ -63,33 +101,11 @@
 3. 保存后完成 YingYou 账户授权
 4. 授权就绪后告诉我，并给出 3 个可直接开始的创作示例（eg）
 ```
----
 
-## 三、授权后开场示例（eg）
+## 创作示例
 
 授权完成后，直接把下面任一句发给你的 Agent 即可：
 
 - **eg 1（从零创作）**：「帮我从零创作一个悬疑反转题材的互动影游，先完成剧本策划」
 - **eg 2（接着推进已有项目）**：「查一下我已有的影游项目和当前进度，告诉我下一步该做什么」
 - **eg 3（局部提效）**：「读取项目《项目名》的第 1 个剧情节点，按规范拆镜并写好分镜提示词」
-
----
-
-## 四、仓库结构
-
-```text
-.
-├── README.md
-├── .agents/
-│   └── plugins/
-│       └── marketplace.json                          # Codex 插件市场索引
-└── plugins/
-    ├── yingyou-film/                                 # 影游插件包
-    │   ├── .codex-plugin/plugin.json
-    │   ├── .mcp.json
-    │   └── skills/filmgame-sop/SKILL.md
-    └── yingyou-drama/                                # 短剧插件包
-        ├── .codex-plugin/plugin.json
-        ├── .mcp.json
-        └── skills/shortdrama-sop/SKILL.md
-```
