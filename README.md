@@ -64,21 +64,7 @@ codex plugin add weaver-film@weaver
  
 ## 其他客户端
 
-### WorkBuddy
-
-直接将下面话术发送给 WorkBuddy：
-
-```text
-帮我在 WorkBuddy 中连接 Weaver Remote MCP，让我可以在这里创作互动影游。
-
-1. 新增一个名为 Weaver 的远程 HTTP MCP 连接器，地址填 `https://api.yy.vi-relay.com/api/v1/mcp/film`
-2. 写入后提醒我去连接器管理页点击 Trust（信任）并完成 Weaver 账户 OAuth 授权
-3. 授权就绪后告诉我，并给出 3 个可直接开始的创作示例（eg）
-```
-
-> 如配置中存在旧的本地测试连接器（如 `filmgame-local`），建议移除后再使用云端 `Weaver`，避免工具名冲突。
-
-### Claude / Hermes / 通用 Remote MCP 客户端
+### WorkBuddy/ Claude / Hermes / 通用 Remote MCP 客户端
 
 直接将下面话术发送给 Claude 或其他支持远程 MCP 连接器的客户端：
 
