@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "yingyou-film": {
+    "weaver-film": {
       "url": "https://api.yy.vi-relay.com/api/v1/mcp/film"
     }
   }
