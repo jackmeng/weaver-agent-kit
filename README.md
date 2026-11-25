@@ -91,10 +91,10 @@ codex plugin add yingyou-film@yingyou
 
 ### Claude / Hermes / 通用 Remote MCP 客户端
 
-直接将下面话术发送给 Hermes 或其他支持远程 MCP 连接器的客户端：
+直接将下面话术发送给 Claude 或其他支持远程 MCP 连接器的客户端：
 
 ```text
-帮我在 Hermes 中连接 YingYou Remote MCP，让我可以在这里创作互动影游。
+帮我在 当前Agent 中连接 YingYou Remote MCP，让我可以在这里创作互动影游。
 
 1. 新建一个名为 YingYou 的连接器
 2. 连接地址填 `https://api.yy.vi-relay.com/api/v1/mcp/film`
