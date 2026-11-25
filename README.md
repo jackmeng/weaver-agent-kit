@@ -14,18 +14,34 @@ codex plugin add weaver-film@weaver
 codex mcp login weaver-film
 ```
 
+### ChatGPT Desktop 本地安装（Codex 模式）
 ### ChatGPT（Codex）
 
-直接将下面话术发送给 ChatGPT（Codex）：
+1. 首次使用时，在终端执行上面的 `codex plugin marketplace add` 命令。
+2. 在 ChatGPT Desktop 的 **Plugins（插件）** 中选择 **Weaver (影游创作平台)**，打开 **Weaver 影游创作** 并安装。如果刚添加 marketplace 后没有看到它，重启 Desktop 后再检查。
+3. 如果 Desktop 提示连接 Weaver，按提示完成 OAuth 授权。
+4. 在 Desktop 的 **Codex 模式** 新建本地会话，通过 `@` 选择已安装的 Weaver 插件。
+   直接将下面话术发送给 ChatGPT（Codex）：
 
+macOS 上也可以在添加 marketplace 后从终端打开插件详情页。
 ```text
 帮我安装 Weaver Plugin，让我可以在这里创作互动影游。
 
+```bash
+open 'codex://plugins/install/weaver-film?marketplace=weaver'
 1. 添加插件目录：执行 `codex plugin marketplace add https://github.com/jackmeng/weaver-agent-kit.git --ref main`
 2. 安装插件：执行 `codex plugin add weaver-film@weaver`
 3. 新建任务后完成 Weaver 账户授权
 就绪后告诉我，可以开始创作了。
 ```
+
+### ChatGPT Work Mode
+
+这个仓库提供 Codex 本地 marketplace。当前尚未验证通过该 marketplace 安装的 Weaver 能在 ChatGPT Work Mode 调用 MCP 工具。插件显示已安装或能读取创作指南时，仍需在 Work Mode 新会话中实际调用 `list_projects` 验收。
+
+在具备自定义 MCP 创建权限的 Business、Enterprise 或 Edu 工作区，可以在 ChatGPT 网页端打开 **Plugins → + → Add custom MCP server**，填写 `https://api.weavercreate.com/api/v1/mcp/film`，创建插件并按提示完成 OAuth。再在 Work Mode 新建会话，选中该插件并测试 `list_projects`。个人 Plus 用户可以按上文使用 Codex CLI，或在 Desktop 的 Codex 模式验证本地安装。
+
+参考 [OpenAI 自定义 MCP 接入说明](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt)。
 
 ## 首次验证
 
@@ -61,24 +77,10 @@ codex plugin add weaver-film@weaver
 - **插件版本**（`plugin.json` 中的 `version`，遵循 SemVer）：仅在插件包内容（`.mcp.json`、随包 `SKILL.md`、插件清单）变更时递增；客户端按此版本判断是否需要升级插件。
 - **远程 MCP 服务端版本**：工具定义与阶段指南由服务端实时下发，无需升级插件即可生效。当前连到的服务端版本可在 MCP `initialize` 响应的 `serverInfo.version` 或 HTTP 响应头 `X-MCP-Server-Version` 中查看。
 
- 
+
 ## 其他客户端
-
-### WorkBuddy
-
-直接将下面话术发送给 WorkBuddy：
-
-```text
-帮我在 WorkBuddy 中连接 Weaver Remote MCP，让我可以在这里创作互动影游。
-
-1. 新增一个名为 Weaver 的远程 HTTP MCP 连接器，地址填 `https://api.weavercreate.com/api/v1/mcp/film`
-2. 写入后提醒我去连接器管理页点击 Trust（信任）并完成 Weaver 账户 OAuth 授权
-3. 授权就绪后告诉我，并给出 3 个可直接开始的创作示例（eg）
-```
-
-> 如配置中存在旧的本地测试连接器（如 `filmgame-local`），建议移除后再使用云端 `Weaver`，避免工具名冲突。
-
-### Claude / Hermes / 通用 Remote MCP 客户端
+ 
+### WorkBuddy/ Claude / Hermes / 通用 Remote MCP 客户端
 
 直接将下面话术发送给 Claude 或其他支持远程 MCP 连接器的客户端：
 
@@ -98,3 +100,4 @@ codex plugin add weaver-film@weaver
 - **eg 1（从零创作）**：「帮我从零创作一个悬疑反转题材的互动影游，先完成剧本策划」
 - **eg 2（接着推进已有项目）**：「查一下我已有的影游项目和当前进度，告诉我下一步该做什么」
 - **eg 3（局部提效）**：「读取项目《项目名》的第 1 个剧情节点，按规范拆镜并写好分镜提示词」
+
