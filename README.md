@@ -14,26 +14,18 @@ codex plugin add weaver-film@weaver
 codex mcp login weaver-film
 ```
 
-### ChatGPT Desktop 本地安装（Codex 模式）
+### ChatGPT（Codex）
 
-1. 首次使用时，在终端执行上面的 `codex plugin marketplace add` 命令。
-2. 在 ChatGPT Desktop 的 **Plugins（插件）** 中选择 **Weaver (影游创作平台)**，打开 **Weaver 影游创作** 并安装。如果刚添加 marketplace 后没有看到它，重启 Desktop 后再检查。
-3. 如果 Desktop 提示连接 Weaver，按提示完成 OAuth 授权。
-4. 在 Desktop 的 **Codex 模式** 新建本地会话，通过 `@` 选择已安装的 Weaver 插件。
+直接将下面话术发送给 ChatGPT（Codex）：
 
-macOS 上也可以在添加 marketplace 后从终端打开插件详情页。
+```text
+帮我安装 Weaver Plugin，让我可以在这里创作互动影游。
 
-```bash
-open 'codex://plugins/install/weaver-film?marketplace=weaver'
+1. 添加插件目录：执行 `codex plugin marketplace add https://github.com/jackmeng/weaver-agent-kit.git --ref main`
+2. 安装插件：执行 `codex plugin add weaver-film@weaver`
+3. 新建任务后完成 Weaver 账户授权
+就绪后告诉我，可以开始创作了。
 ```
-
-### ChatGPT Work Mode
-
-这个仓库提供 Codex 本地 marketplace。当前尚未验证通过该 marketplace 安装的 Weaver 能在 ChatGPT Work Mode 调用 MCP 工具。插件显示已安装或能读取创作指南时，仍需在 Work Mode 新会话中实际调用 `list_projects` 验收。
-
-在具备自定义 MCP 创建权限的 Business、Enterprise 或 Edu 工作区，可以在 ChatGPT 网页端打开 **Plugins → + → Add custom MCP server**，填写 `https://api.weavercreate.com/api/v1/mcp/film`，创建插件并按提示完成 OAuth。再在 Work Mode 新建会话，选中该插件并测试 `list_projects`。个人 Plus 用户可以按上文使用 Codex CLI，或在 Desktop 的 Codex 模式验证本地安装。
-
-参考 [OpenAI 自定义 MCP 接入说明](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt)。
 
 ## 首次验证
 
